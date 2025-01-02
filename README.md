@@ -1,0 +1,2 @@
+# Predicting_Topological_Number_Control_Magnetic_Structures
+Predicting Topological Numbers and Controlling Magnetic Structure Characteristics Using Machine Learning Techniques
