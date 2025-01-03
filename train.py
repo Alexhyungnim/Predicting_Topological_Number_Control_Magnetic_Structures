@@ -6,6 +6,8 @@ import os
 import pandas as pd
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+
+#hyperparameters for our model
 ALPHA, BETA = 0.1, 1.0  # Hamiltonian, Regularization
 EXJ, DMN, HEXTZ, KZ = 1.0, 0.5, 0.0, 0.5
 EPOCHS = 2000
@@ -20,13 +22,13 @@ x_valid = np.concatenate(
     [np.load("Data/ordinary_train/{}".format(path)) for path in ["circle.npy", "square.npy", "triangle.npy"]], axis=0)
 y_valid = np.ones((len(x_valid), 1), dtype=np.float32)
 
-#stride가 홀수면 KS가 홀수 stride가 짝수면 KS가 짝수
 os.makedirs(save_dir, exist_ok=True)
 if os.listdir(save_dir) == []:
     model_dir = save_dir + "0"
 else:
     model_dir = save_dir + str(max([int(path) for path in os.listdir(save_dir)]) + 1)
 
+#bring the model structure
 model = md.cnn_model(
     alpha=ALPHA,
     beta=BETA,
@@ -35,10 +37,14 @@ model = md.cnn_model(
     Hextz=HEXTZ,
     Kz=KZ,
 )
+
+#uploading the filled model
 model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.001), loss='mse')
 model.nn.summary()
 # callbacks = md.get_callbacks(os.path.join(model_dir, "ckpt", "Ep{epoch:04d}"))
 callbacks = [md.CustomCallback(model_dir, (x_valid, y_valid))]
+
+#train the model
 history = model.fit(
     x_train,
     y_train,
