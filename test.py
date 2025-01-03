@@ -2,7 +2,6 @@ import tensorflow as tf
 import numpy as np
 from Custom_Modules.modules import compute_skyrmion_number, spin_to_rgb
 import Custom_Modules.modules as md
-import Custom_Modules.DG_modules as DG
 import matplotlib.pyplot as plt
 import os
 import cv2
@@ -16,7 +15,6 @@ EXJ, DMN, HEXTZ, KZ = 1.0, 0.5, 0.0, 0.05
 EPOCH = 1999
 BATCH_SIZE = 1
 MODNUM = 1
-# EPOCHS = 500
 
 # data loading
 x_test = np.load("Data/ordinary_train/circle.npy").astype(np.float32)[0:1]  # "circle.npy", "triangle.npy", "beehive.npy", "maze.npy", "heart.npy"
@@ -64,3 +62,4 @@ plt.imshow(np.squeeze(density[0], axis=-1), vmin=-0.1, vmax=0.1, cmap='gray')
 # cbar.ax.tick_params(labelsize=35)
 plt.savefig(density_dir + f"/{EXJ}_{DMN}_{KZ}.png")
 plt.close()  # Close the figure to free memory
+
