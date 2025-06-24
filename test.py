@@ -22,7 +22,7 @@ MODNUM = 25
 
 for i in range(MODNUM):
     plt.subplot(int(MODNUM/5), 5, i+1)
-    x_test = np.load("Data/ordinary_train/circle.npy").astype(np.float32)[0:1]  # "circle.npy", "triangle.npy", "beehive.npy", "maze.npy", "heart.npy"
+    x_test = np.load("circle.npy").astype(np.float32)[0:1]  # "circle.npy", "triangle.npy", "beehive.npy", "maze.npy", "heart.npy"
     plt.imshow(x_test[0], cmap = 'gray', origin = 'lower')
     plt.gca().set_xticks([])
     plt.gca().set_yticks([])
