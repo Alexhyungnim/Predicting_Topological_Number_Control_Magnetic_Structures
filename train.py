@@ -17,11 +17,13 @@ BATCH_SIZE = 1
 model_nums = 1
 shape_dict = {0:"circle", 1:"square", 2:"triangle", 3:"inv_circle", 4:"square_donut", 5:"dice"}
 ti=0
+model_dir = 'models'
+os.makedirs(model_dir, exist_ok=True)
 save_dir = f"models/{ALPHA}_{BETA}_{ti}_{item}/{EXJ}_{DMN}_{HEXTZ}_{KZ}/"
-x_train = np.load(f"Data/ordinary_train/{shape_dict[ti]}.npy").astype(np.float32)   #circle, square, triangle, inv_circle, square_donut, dice
+x_train = np.load(f"{shape_dict[ti]}.npy").astype(np.float32)   #circle, square, triangle, inv_circle, square_donut, dice
 y_train = item * np.ones((len(x_train), 1), dtype=np.float32)
 x_valid = np.concatenate(
-    [np.load("Data/ordinary_train/{}".format(path)) for path in ["circle.npy", "square.npy", "triangle.npy"]], axis=0).astype(np.float32)
+    [np.load("{}".format(path)) for path in ["circle.npy", "square.npy", "triangle.npy"]], axis=0).astype(np.float32)
 y_valid = np.ones((len(x_valid), 1), dtype=np.float32)
 os.makedirs(save_dir, exist_ok=True)
 for modnums in range(model_nums):
@@ -63,3 +65,4 @@ for modnums in range(model_nums):
     print(f"Train_Item:{shape_dict[ti]}, Euler_num:{item}, modnums:{modnums}")
 
 print("Training Complete")
+
