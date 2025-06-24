@@ -9,18 +9,22 @@ import tensorflow as tf
 
 #parameters
 ALPHA, BETA = 0.1, 1.0  # Hamiltonian, Regularization
-EXJ, DMN, HEXTZ, KZ = 1.0, 0.5, 0.0, 0.05
-EPOCH = 1999
+euler_values = np.arange(-3.0, 3.25, 0.25)
+fixed_euler_value = 1.0
+item = fixed_euler_value
+EXJ, DMN, HEXTZ, KZ = 1.0, 0.5, 0.0, 0.5
+train_image = 0  #shape_dict = {0:"circle", 1:"square", 2:"triangle", 3:"inv_circle", 4:"square_donut", 5:"dice"}
+EPOCHS = 99
 BATCH_SIZE = 1
-MODNUM = 1
+MODNUM = 0
 
 
 # Predict spin configuration
 x_test = np.load("circle.npy").astype(np.float32)[0:1]
-save_dir = f"models/{ALPHA}_{BETA}/{EXJ}_{DMN}_{HEXTZ}_{KZ}/"
+save_dir = f"models/{ALPHA}_{BETA}_{train_image}_{item}/{EXJ}_{DMN}_{HEXTZ}_{KZ}/"
 model_dir = save_dir + str(MODNUM)
 model = tf.keras.models.load_model(model_dir + "/model")
-model.load_weights(model_dir + "/ckpt/Ep{:07d}".format(EPOCH))
+model.load_weights(model_dir + "/ckpt/Ep{:07d}".format(EPOCHS))
 spin = model(x_test[0:1])
 plt.imshow(spin_to_rgb(spin[0]))
 plt.show()
@@ -58,10 +62,10 @@ def plot_sz_profile(sz_profile: Union[np.ndarray, tf.Tensor], Kz: float):
     # ax.set_title('$s_z$ Profile with Zero Crossing Centered')
     ax.legend(frameon = True, fontsize=12, loc = 'upper right')
     plt.savefig(f'Kz{KZ}.png')
-    plt.show()
+    # plt.show()
 
 plot_sz_profile(sz_profile, Kz=KZ)
-# Map the whole spin vectors in 3D visualization 
+# Map the whole spin vectors in 3D visualization
 def plot_vectors(vectors: Union[np.ndarray, tf.Tensor]):
     """
     Plot 3D vectors using Mayavi.
