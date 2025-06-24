@@ -16,10 +16,10 @@ BATCH_SIZE = 2
 save_dir = f"models/{ALPHA}_{BETA}/{EXJ}_{DMN}_{HEXTZ}_{KZ}/"
 
 x_train = np.load(
-    "Data/ordinary_train/circle.npy")  # "train.npy", "circles_skynum.npy", "circle.npy", "square.npy", "triangle.npy"
+    "circle.npy")  # "train.npy", "circles_skynum.npy", "circle.npy", "square.npy", "triangle.npy"
 y_train = np.ones((len(x_train), 1), dtype=np.float32)
 x_valid = np.concatenate(
-    [np.load("Data/ordinary_train/{}".format(path)) for path in ["circle.npy", "square.npy", "triangle.npy"]], axis=0)
+    [np.load("{}".format(path)) for path in ["circle.npy", "square.npy", "triangle.npy"]], axis=0)
 y_valid = np.ones((len(x_valid), 1), dtype=np.float32)
 
 os.makedirs(save_dir, exist_ok=True)
