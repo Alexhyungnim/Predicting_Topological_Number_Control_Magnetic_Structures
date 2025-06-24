@@ -16,7 +16,7 @@ MODNUM = 1
 
 
 # Predict spin configuration
-x_test = np.load("Data/ordinary_train/circle.npy").astype(np.float32)[0:1]
+x_test = np.load("circle.npy").astype(np.float32)[0:1]
 save_dir = f"models/{ALPHA}_{BETA}/{EXJ}_{DMN}_{HEXTZ}_{KZ}/"
 model_dir = save_dir + str(MODNUM)
 model = tf.keras.models.load_model(model_dir + "/model")
