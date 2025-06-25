@@ -3,8 +3,8 @@ from tvtk.api import tvtk
 import numpy as np
 from typing import Union
 from matplotlib import pyplot as plt
-from Custom_Modules.modules import spin_to_rgb, compute_skyrmion_number, get_energy
-from Custom_Modules.modules import AddNoise, CustomConv2D
+from modules import spin_to_rgb, compute_skyrmion_number, get_energy
+from modules import AddNoise, CustomConv2D
 import tensorflow as tf
 
 #parameters
