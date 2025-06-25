@@ -1,7 +1,7 @@
 import tensorflow as tf
 import numpy as np
-from Custom_Modules.modules import compute_skyrmion_number, spin_to_rgb
-import Custom_Modules.modules as md
+from modules import compute_skyrmion_number, spin_to_rgb
+import modules as md
 import matplotlib.pyplot as plt
 import os
 import cv2
